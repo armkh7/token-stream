@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PublicKey } from '@solana/web3.js';
 
 import Home from './pages/Home';
+import CreateStream from './pages/CreateStream';
 
 function App() {
 
@@ -13,7 +14,6 @@ function App() {
   const handleConnect = async () => {
     if (window.solana &&  window.solana.isPhantom) {
       try {
-        console.log('====== window.solana ', window.solana.isPhantom)
         await window.solana.connect();
         const publicKey = await window.solana.publicKey;
 
@@ -40,7 +40,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home loggedIn={loggedIn} publicKey={publicKey} handleConnect={handleConnect} handleLogout={handleLogout} />} />
+        <Route path="/" element={<Home loggedIn={loggedIn} publicKeyObj={publicKey} handleConnect={handleConnect} handleLogout={handleLogout} />} />
+        <Route path="/create-stream" element={<CreateStream />} />
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </Router>
